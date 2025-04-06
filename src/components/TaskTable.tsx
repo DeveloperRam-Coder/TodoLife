@@ -52,9 +52,7 @@ export function TaskTable() {
       : <ArrowDown className="h-4 w-4 ml-1" />;
   };
 
-  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    selectAllTasks(event.target.checked);
-  };
+
 
   const handleEdit = (task: Task) => {
     setTaskToEdit(task);
@@ -85,8 +83,9 @@ export function TaskTable() {
             <tr className="border-b bg-secondary/30">
               <th className="w-12">
                 <Checkbox 
-                  checked={selectedTasks.length > 0 && selectedTasks.length === filteredTasks.length}
-                  onCheckedChange={handleSelectAll}
+                  checked={selectedTasks.length === filteredTasks.length}
+                  indeterminate={selectedTasks.length > 0 && selectedTasks.length < filteredTasks.length}
+                  onCheckedChange={(checked) => selectAllTasks(!!checked)}
                   aria-label="Select all tasks"
                 />
               </th>
